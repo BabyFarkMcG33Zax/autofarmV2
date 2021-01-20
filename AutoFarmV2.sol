@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at BscScan.com on 2021-01-18
+ *Submitted for verification at BscScan.com on 2021-01-20
 */
 
 // SPDX-License-Identifier: MIT
@@ -1447,7 +1447,7 @@ contract AutoFarmV2 is Ownable, ReentrancyGuard {
     }
 
     address public AUTO = 0x4508ABB72232271e452258530D4Ed799C685eccb; // 1:1 migration to AUTOv2
-    address public AUTOv2 = 0x12300Ea3D3444e9106c65913dE24c58462aBfe24;
+    address public AUTOv2 = 0xf930533173C0B66a8863f4E6883176f09038d3a6;
 
     address public burnAddress = 0x000000000000000000000000000000000000dEaD;
 
@@ -1728,8 +1728,7 @@ contract AutoFarmV2 is Ownable, ReentrancyGuard {
     }
 
     function migrateToAUTOv2(uint256 _inputAmt) public {
-        require(IERC20(AUTOv2).totalSupply() < AUTOMaxSupply, "too late :(");
-
+        require(block.number < 5033333, "too late :("); // 20 Feb 2021 - https://bscscan.com/block/countdown/5033333
         IERC20(AUTO).safeIncreaseAllowance(burnAddress, _inputAmt);
         IERC20(AUTO).safeTransferFrom(
             address(msg.sender),
