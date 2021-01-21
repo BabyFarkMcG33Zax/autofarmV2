@@ -1,6 +1,6 @@
 /**
  *Submitted for verification at BscScan.com on 2021-01-18
-*/
+ */
 
 // SPDX-License-Identifier: MIT
 
@@ -1498,10 +1498,10 @@ contract StratVLEV is Ownable, ReentrancyGuard, Pausable {
         } else {
             venusToWantPath = [venusAddress, wbnbAddress, wantAddress];
             // if (venusAddress == wantAddress) {}      // Then venusToWantPath will never be used.
-
-            earnedToAUTOPath = [venusAddress, wbnbAddress, AUTOAddress];
-            // if (wbnbAddress == venusAddress) {}      // Not possible
         }
+
+        earnedToAUTOPath = [venusAddress, wbnbAddress, AUTOAddress];
+        // if (wbnbAddress == venusAddress) {}      // Not possible
 
         vTokenAddress = _vTokenAddress;
         venusMarkets = [vTokenAddress];
