@@ -1560,7 +1560,8 @@ contract StratVLEV is Ownable, ReentrancyGuard, Pausable {
                 .div(entranceFeeFactorMax);
         }
 
-        sharesTotal += sharesAdded;
+        sharesTotal = sharesTotal.add(sharesAdded);
+
 
         IERC20(wantAddress).safeTransferFrom(
             address(msg.sender),
@@ -1785,7 +1786,7 @@ contract StratVLEV is Ownable, ReentrancyGuard, Pausable {
         if (sharesRemoved > sharesTotal) {
             sharesRemoved = sharesTotal;
         }
-        sharesTotal -= sharesRemoved;
+        sharesTotal = sharesTotal.sub(sharesRemoved);
 
         uint256 wantBal = IERC20(wantAddress).balanceOf(address(this));
         if (wantBal < _wantAmt) {
@@ -1864,6 +1865,7 @@ contract StratVLEV is Ownable, ReentrancyGuard, Pausable {
     function setEntranceFeeFactor(uint256 _entranceFeeFactor) public {
         require(msg.sender == govAddress, "Not authorised");
         require(_entranceFeeFactor > entranceFeeFactorLL, "!safe - too low");
+        require(_entranceFeeFactor <= entranceFeeFactorMax, "!safe - too high");
         entranceFeeFactor = _entranceFeeFactor;
     }
 
